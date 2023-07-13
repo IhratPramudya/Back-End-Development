@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start-prod": "NODE_ENV=production node ./src/server.js",
+    "migrate": "node-pg-migrate",
+    "start-dev": "nodemon ./src/server.js",
+    "lint": "eslint ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2",
+    "@hapi/inert": "^7.1.0",
+    "@hapi/jwt": "^3.2.0",
+    "amqplib": "^0.10.3",
+    "auto-bind": "^5.0.1",
+    "aws-sdk": "^2.1413.0",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.3.1",
+    "joi": "^17.9.2",
+    "nanoid": "^3.3.4",
+    "node-pg-migrate": "^6.2.2",
+    "pg": "^8.11.0",
+    "redis": "^4.6.7"
+  },
+  "devDependencies": {
+    "eslint": "^8.42.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lint-staged": "^13.2.2",
+    "nodemon": "^2.0.22",
+    "prettier": "2.8.8"
+  }
+}
