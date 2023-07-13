@@ -50,7 +50,7 @@ web_modules/
 *.tsbuildinfo
 
 gocamp-api-webserver.pem
-
+nodejs-ssl-key.pem
 # Optional npm cache directory
 .npm
 
