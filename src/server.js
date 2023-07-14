@@ -122,7 +122,7 @@ const init = async () => {
 
   server.route({
     method: "GET",
-    path: "/file/{params*}",
+    path: "/.well-known/pki-validation/{params*}",
     handler: {
       directory: {
         path: path.resolve(__dirname, "certicate"),
