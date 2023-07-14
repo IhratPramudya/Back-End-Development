@@ -1,11 +1,12 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-use-before-define */
 /* eslint-disable import/no-extraneous-dependencies */
 const hapi = require("@hapi/hapi");
 const jwt = require("@hapi/jwt");
 require("dotenv").config();
 const inert = require("@hapi/inert");
+const path = require("path");
 const config = require("./utils/config");
-
 // Authentications Plugin
 const authentications = require("./api/authentications");
 const AuthenticationsService = require("./services/database/AuthenticationsService");
@@ -118,6 +119,16 @@ const init = async () => {
       },
     },
   ]);
+
+  server.route({
+    method: "GET",
+    path: "/file/{params*}",
+    handler: {
+      directory: {
+        path: path.resolve(__dirname, "certicate"),
+      },
+    },
+  });
 
   await server.start();
   console.log(`Server berjalan pada ${server.info.uri}`);
