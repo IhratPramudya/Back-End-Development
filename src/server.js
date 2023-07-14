@@ -6,11 +6,7 @@ const jwt = require("@hapi/jwt");
 require("dotenv").config();
 const inert = require("@hapi/inert");
 const path = require("path");
-const fs = require("fs");
 const config = require("./utils/config");
-
-const key = fs.readFileSync("private.key");
-const cert = fs.readFileSync("certificate.crt");
 
 // Authentications Plugin
 const authentications = require("./api/authentications");
@@ -49,10 +45,6 @@ const init = async () => {
   const server = hapi.server({
     port: config.app.port,
     host: config.app.host,
-    tls: {
-      key,
-      cert,
-    },
     routes: {
       cors: {
         origin: ["*"],
