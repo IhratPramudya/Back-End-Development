@@ -5,8 +5,8 @@ const hapi = require("@hapi/hapi");
 const jwt = require("@hapi/jwt");
 require("dotenv").config();
 const inert = require("@hapi/inert");
+const path = require("path");
 const fs = require("fs");
-const https = require("https");
 const config = require("./utils/config");
 
 const key = fs.readFileSync("private.key");
@@ -49,6 +49,10 @@ const init = async () => {
   const server = hapi.server({
     port: config.app.port,
     host: config.app.host,
+    tls: {
+      key,
+      cert,
+    },
     routes: {
       cors: {
         origin: ["*"],
@@ -125,21 +129,18 @@ const init = async () => {
     },
   ]);
 
-  try {
-    // await server.start();
-    // console.log(`Server berjalan pada ${server.info.uri}`);
+  server.route({
+    method: "GET",
+    path: "/.well-known/pki-validation/{params*}",
+    handler: {
+      directory: {
+        path: path.resolve(__dirname, "certicate"),
+      },
+    },
+  });
 
-    const cred = {
-      key,
-      cert,
-    };
-
-    const httpsServer = https.createServer(cred, server);
-
-    httpsServer.listen(8443);
-  } catch (err) {
-    console.log(err.message);
-  }
+  await server.start();
+  console.log(`Server berjalan pada ${server.info.uri}`);
 };
 
 init();
